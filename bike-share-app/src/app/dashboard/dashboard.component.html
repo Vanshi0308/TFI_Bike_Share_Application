@@ -1,0 +1,82 @@
+<mat-toolbar><button mat-raised-button color="primary" (click)="onClick()">Logout</button></mat-toolbar>
+
+<form [formGroup]="schemeSelectForm" class="form-container" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>Select bike city</mat-label>
+        <mat-select required [value]="defaultSchemeId" formControlName="schemeId">
+            @for (scheme of schemes; track scheme.id) {
+                <mat-option [value]="scheme.id">{{scheme.city}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary">Get Station Info</button>
+</form>
+
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput placeholder="Search like Riverwalk" (keyup)="applyFilter($event)"/>
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="schemeId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> SchemeId </th>
+        <td mat-cell *matCellDef="let row"> {{row.schemeId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="schemeShortName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> SchemeShortName </th>
+        <td mat-cell *matCellDef="let row"> {{row.schemeShortName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="stationId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> StationId </th>
+        <td mat-cell *matCellDef="let row"> {{row.stationId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nameIrish">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> NameIrish </th>
+        <td mat-cell *matCellDef="let row"> {{row.nameIrish}} </td>
+    </ng-container>
+    <ng-container matColumnDef="docksCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DocksCount </th>
+        <td mat-cell *matCellDef="let row"> {{row.docksCount}} </td>
+    </ng-container>
+    <ng-container matColumnDef="bikesAvailable">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> BikesAvailable </th>
+        <td mat-cell *matCellDef="let row"> {{row.bikesAvailable}} </td>
+    </ng-container>
+    <ng-container matColumnDef="bikesAvailableTypeOne">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> BikesAvailableTypeOne </th>
+        <td mat-cell *matCellDef="let row"> {{row.bikesAvailableTypeOne}} </td>
+    </ng-container>
+    <ng-container matColumnDef="bikesAvailableTypeTwo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> BikesAvailableTypeTwo </th>
+        <td mat-cell *matCellDef="let row"> {{row.bikesAvailableTypeTwo}} </td>
+    </ng-container>
+    <ng-container matColumnDef="docksAvailable">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DocksAvailable </th>
+        <td mat-cell *matCellDef="let row"> {{row.docksAvailable}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+    </ng-container>
+    <ng-container matColumnDef="latitude">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Latitude </th>
+        <td mat-cell *matCellDef="let row"> {{row.latitude}} </td>
+    </ng-container>
+    <ng-container matColumnDef="longitude">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Longitude </th>
+        <td mat-cell *matCellDef="let row"> {{row.longitude}} </td>
+    </ng-container>
+    <ng-container matColumnDef="dateStatus">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DateStatus </th>
+        <td mat-cell *matCellDef="let row"> {{row.dateStatus}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons>
+</mat-paginator>

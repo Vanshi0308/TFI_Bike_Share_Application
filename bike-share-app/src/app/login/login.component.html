@@ -1,0 +1,28 @@
+<form [formGroup]="loginForm" class="form-container" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class="full-width">
+                <mat-label>Username</mat-label>
+                <input formControlName="username" matInput placeholder="Username" type="text">
+                @if (loginForm.get("username")?.hasError('required') || isSubmitted) {
+                    <mat-error>Username is <strong>required</strong></mat-error>
+                }
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput placeholder="Password" type="password">
+                @if (loginForm.get("password")?.hasError('required') || isSubmitted) {
+                    <mat-error>Password is <strong>required</strong></mat-error>
+                }
+            </mat-form-field>
+        </div>
+    </div>
+        <button type="submit" mat-raised-button color="primary">Login</button>
+</form>
+
+<div> If not a registered user, please signup<a routerLink="/signup"> here </a></div>
+<div @if(loginSuccess)>{{loginMessage}}</div>
